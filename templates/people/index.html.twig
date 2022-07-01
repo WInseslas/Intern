@@ -1,0 +1,74 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}People index | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class='col-12' >
+            <p class="h2 text-center mt-4">Trainees classify by year of passage.</p>
+            {% include "partials/_flash.html.twig" %}
+            <div class="container">
+                <div class="row flex">
+                    
+                    {% for year in years %}
+                        <div class="col-3 mt-3">
+                            <div class="card">
+                                <div class="view overlay">
+                                    <img class="card-img-top" src="/assets/images/illustration-2.png" alt="Card image cap">
+                                    <a>
+                                        <div class="mask rgba-white-slight text-center">
+                                            {% if  year.element > 1 %}
+                                                {{ year.element }} Trainees
+                                            {% else %}
+                                                {{  year.element }} Trainee
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="card-body elegant-color white-text rounded-bottom">
+                                    <h4 class="card-title text-center">
+                                        {# {{ interns.lastname() |capitalize }} 
+                                        {% if interns.firstname() != null %}
+                                            {{ interns.firstname() |lower }}
+                                        {% endif %} #}
+                                    </h4>
+                                    <hr class="hr-light">
+                                    <p class="card-text white-text mb-4 text-center fw-bold fst-italic">
+                                       <a href="{{ path('app_people_statistical', {year: year.year}) }}" class="text-decoration-none"><i class="fas fa-calendar"></i> {{ year.year }}</a>
+                                    </p>
+                                    {# <a href="{{ path('user.show', {id: interns.id, slug: interns.getSlug() }) }}" class="white-text d-flex justify-content-end text-decoration-none">
+                                        <h5>Voir la suite <i class="fas fa-angle-double-right"></i></h5>
+                                    </a> #}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                            <div class="alert alert-warning">
+                               no records found
+                            </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="navigation mt-4 ml-2 shadow-none p-4 mb-4 bg-light d-flex justify-content-center">
+                {{ knp_pagination_render(years) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

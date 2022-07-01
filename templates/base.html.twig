@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="winseslas" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        
+        {% block logo %}<link rel="icon" href="assets/images/php.png">{% endblock %}
+
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        {% block javascripts %}{% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+        {% if app.user %}
+            {% include "partials/_modal_logout.html.twig" %}
+        {% endif %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded fixed-top" aria-label="Eleventh navbar example" style="background-color: #eee;">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bolder" href="">MODAFA</a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse" id="navbarsExample09">
+                    <div class="navbar-collapse collapse" id="navbarsExample09">
+                        {% block header %}
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item fw-bolder">
+                                    <a class="nav-link active" aria-current="page" href="{{path('app_main')}}">Home</a>
+                                </li>
+                                {% if app.user %}
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ path('app_profile', {id: app.user.id, slug: app.user.slug}) }}">My account</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ path('app_logout') }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ path('app_login') }}">Sign in</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ path('app_certificate_search') }}">Verification</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endblock %}
+                        
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block body %}{% endblock %}
+        <div class="container">
+            <footer class="py-5">
+                <div class="row">
+                    {% block footer %}
+                        {% include "partials/_footer.html.twig" %}
+                    {% endblock %}
+                    </div>
+                        <div class="d-flex justify-content-between py-4 my-4 border-top">
+                            <p>
+                                <span>Copyright © <script>document.write(new Date().getFullYear());</script></span> 
+                                <i>Winseslas. All rights reserved..</i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verified | MODAFA{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/assets/css/starter-template.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/jumbotron.css">
+{% endblock %}
+
+{% block body %}
+    
+    <div class="container mt-4">
+        <div class="container mt-4">
+            {% include "partials/_flash.html.twig" %}
+        </div>
+
+        <div class="starter-template">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary">{{ button_label|default('Verified') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+   
+{% endblock %}

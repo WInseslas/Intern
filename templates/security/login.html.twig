@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login | MODAFA{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="assets/css/starter-template.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4" >
+        <div class="starter-template">
+            
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    {% if error %}
+                        <div class="mt-4 text-center justify-content-between py-4 px-4 px-xl-5 bg-danger rounded">
+                            <div class="text-white mb-3 mb-md-0">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
+                        </div> 
+                    {% endif %}
+                    {% include "partials/_flash.html.twig" %}
+                    <div class="col-md-4 col-lg-6 col-xl-5">
+                        <img src="assets/images/draw2.svg" class="img-fluid" alt="Sample image">
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <form method="post" class="my-4" action='{{ path('app_login') }}'>
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                                <a class="btn btn-primary btn-floating mx-1" href="{{ path('app_connect_facebook_start') }}">
+                                    <i class="fab fa-facebook-f mt-1"></i>
+                                </a>
+
+                                <a class="btn btn-primary btn-floating mx-1" href="{{ path('app_connect_google_start') }}">
+                                    <i class="fab fa-google mt-1"></i>
+                                </a>
+
+                                <a class="btn btn-primary btn-floating mx-1" href="{{ path('app_connect_linkedin_start') }}">
+                                    <i class="fab fa-linkedin mt-1"></i>
+                                </a>
+                            </div>
+
+                            <div class="divider d-flex align-items-center my-4">
+                                <p class="text-center fw-bold mx-3 mb-0">Or</p>
+                            </div>
+
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.fullname }}, <a href="{{ path('app_logout') }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Logout</a>
+                                </div>
+                            {% endif %}
+
+                            <div class="form-outline mb-2">
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-control-lg" autocomplete="email" required autofocus placeholder="exemple@themodernapplication.com">
+                                <label class="form-label mt-2" for="inputEmail">Please enter your email</label>
+                            </div>
+
+                            <div class="form-outline mb-3">
+                                <input type="password" name="password" id="inputPassword" class="form-control form-control-lg"  autocomplete="current-password" required placeholder="********">
+                                <label class="form-label mt-2" for="inputPassword">Please enter your password</label>
+                            </div>
+                            
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input me-2" type="checkbox" name="_remember_me" id="remember_me"/>
+                                    <label class="form-check-label" for="remember_me"> Remember me</label>
+                                </div>
+                                <a href="{{ path('app_forgotten_password') }}" class="text-body fw-bold">Password forget ?</a>
+                            </div>
+
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Sign in</button>
+                                {# <p class="small fw-bold mt-2 pt-1 mb-0">You don't have an acount ?&nbsp;<a href="{{ path('app_register') }}" class="link-info">Registration</a></p> #}
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

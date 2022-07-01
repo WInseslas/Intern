@@ -1,0 +1,84 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}{{ user.fullname}} | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block pageTitle %}
+    <h1 class="mt-4">Framer</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="starter-template"></div>
+        <div class="container mb-4"></div>
+            <div class="row flex">
+                        
+                <div class="col-xl-6 col-sm-12 col-12 mb-4">
+                    <div class="mt-4">
+                        <div class="view overlay mt-4 text-center">
+                            {% if user.avatar is null %}
+                                <img src="/assets/uploads/images/avatar.PNG" style="height: 250px; width: 300px" class="card-img-top"/>
+                            {% else %}
+                                <img src="/assets/uploads/images/{{ user.avatar }}" style="height: 250px; width: 300px" class="card-img-top"/>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-sm-12 col-12 mb-4">
+                    <div class="card-body elegant-color white-text rounded-bottom">
+                        <table class="table  table-striped table-hover">
+                            <thead>
+                                <tr class="table-active">
+                                    <th colspan="2" class="card-title text-center">
+                                        {{ user.fullname |upper }} 
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="card-text white-text mb-4 text-center">
+                                    <th>Templates record</th>
+                                    <td>{{ user.templates | length }}</td>
+                                </tr>
+                                <tr class="card-text white-text mb-4 text-center">
+                                    <th>Certificate register</th>
+                                    <td>{{ user.certificates | length }}</td>
+                                </tr>
+                                <tr class="card-text white-text mb-4 text-center">
+                                    <th>Trainee supervise</th>
+                                    <td>{{ user.people | length }}</td>
+                                </tr>
+                               
+                                <tr class="card-text white-text" style="text-align: center;">
+                                    <td rowspan="2" >Created at </td>
+                                </tr>
+                                <tr class="card-text white-text" style="text-align: center;">
+                                    <td>
+                                        {{ user.createdAt ? user.createdAt|date('d-M-Y') : ''  }}  
+                                    </td>
+                                </tr class="card-text white-text" style="text-align: center;">
+                                <tr class="card-text white-text" style="text-align: center;">
+                                    <td rowspan="2">Updated at : </td>
+                                </tr>
+                                <tr class="card-text white-text" style="text-align: center;">
+                                    <td>
+                                        {{ user.updatedAt ? user.updatedAt|date('d-M-Y') : '' }}  
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

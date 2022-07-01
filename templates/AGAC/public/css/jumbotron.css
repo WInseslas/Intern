@@ -1,0 +1,16 @@
+body {
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+	background-color: #eee;
+	padding: 25px 15px;
+}
+.jumbotron .btn {
+	padding: 14px 24px;
+	font-size: 21px;
+}
+

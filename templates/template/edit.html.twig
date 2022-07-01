@@ -1,0 +1,35 @@
+
+{% extends 'template.html.twig' %}
+
+{% block title %}Edit | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+    <h1>Edit {{ template.wording }}</h1>
+
+    <div class="container d-flex flex-row-reverse bd-highlight">
+        <a href="{{ path('app_template_index') }}" class="btn btn-info p-2 bd-highlight">Back to list</a>
+        &nbsp;&nbsp;{{ include('template/_delete_form.html.twig') }}
+    </div>
+
+    <div class="card-body elegant-color white-text rounded-bottom">
+        <div class="mt-4">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-success">{{ button_label|default('Update') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

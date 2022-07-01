@@ -1,0 +1,10 @@
+*{
+	font-family: Times New Roman;
+	overflow-x: hidden;
+}
+body {
+	padding-top: 50px;
+}
+.starter-template {
+	padding: 40px 15px;
+}

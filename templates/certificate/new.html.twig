@@ -1,0 +1,31 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}New Certificate | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+    <link href="/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/select2/dist/js/select2.min.js"></script>
+    <script src="/assets/js/select2.js"></script>
+{% endblock %}
+
+
+{% block pageTitle %}
+    <h1 class="mt-4">{{ message }}</h1>
+    <div class=" d-flex flex-row-reverse bd-highlight">
+        <a {% if route == "app_certificate_index" %} href="{{ path('app_certificate_index') }}" {% else %} href="{{ path('app_certificate_index_work') }}"{% endif %} class="btn btn-info">Certificate</a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% include "partials/_flash.html.twig" %}
+    {{ include('certificate/_form.html.twig') }}
+{% endblock %}

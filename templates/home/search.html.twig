@@ -1,0 +1,77 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Result of "{{ search }}" | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block pageTitle %}
+    <h1 class="mt-4">Result of "{{ search }}"</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% if results | length > 0 %}
+        <div class="row">
+            <div class='col-12' >
+                <div class="row flex">
+                    {% for result in results %}
+
+                        <div class="col-3 mt-3">
+                            <div class="card">
+                                <div class="view overlay">
+                                    <img class="card-img-top" src="/assets/images/illustration-2.png" alt="Card image cap">
+                                    <a>
+                                        <div class="mask rgba-white-slight text-center h4">
+                                            {{ result.firstname() |capitalize }} 
+                                            {% if result.lastname() != null %}
+                                                {{ result.lastname() |lower }}
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="card-body elegant-color white-text rounded-bottom">
+                                    <h4 class="card-title text-center">
+                                        {# {{ interns.lastname() |capitalize }} 
+                                        {% if interns.firstname() != null %}
+                                            {{ interns.firstname() |lower }}
+                                        {% endif %} #}
+                                        {{result.startdate | date("Y")}}
+                                    </h4>
+                                    <hr class="hr-light">
+                                    <p class="card-text white-text mb-4 text-center fw-bold fst-italic">
+                                        {% if  result.topic != null %}
+                                            <strong style="color: green;">Topic </strong> : {{ result.topic }}
+                                        {% endif %}
+                                    </p>
+                                    <a href="{{ path('app_people_show', {id: result.id, year: result.startdate | date("Y"),slug: result.getSlug() }) }}" class="white-text d-flex justify-content-center text-decoration-none">
+                                        <h5>See... </h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation mt-4 ml-2 shadow-none p-4 mb-4 bg-light d-flex justify-content-center">
+            {{ knp_pagination_render(results) }}
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4">
+            No results
+        </div>      
+    {% endif %}
+        
+{% endblock %}

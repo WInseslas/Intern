@@ -1,0 +1,43 @@
+knpu_oauth2_client:
+    clients:
+        # configure your clients as described here: https://github.com/knpuniversity/oauth2-client-bundle#configuration
+
+        google_main:
+            # this will be one of the supported types
+            type: google
+            client_id: '%env(OAUTH_GOOGLE_CLIENT_ID)%'
+            client_secret: '%env(OAUTH_GOOGLE_CLIENT_SECRET)%'
+            # the route that you're redirected to after
+            # see the controller example below
+            redirect_route: app_connect_google_check
+            redirect_params: {}
+
+
+        facebook_main:
+            # must be "facebook" - it activates that type!
+            type: facebook
+            # add and set these environment variables in your .env files
+            client_id: '%env(OAUTH_FACEBOOK_CLIENT_ID)%'
+            client_secret: '%env(OAUTH_FACEBOOK_CLIENT_SECRET)%'
+            # a route name you'll create
+            redirect_route: app_connect_facebook_check
+            redirect_params: {}
+            graph_api_version: v2.12
+            # whether to check OAuth2 "state": defaults to true
+            # use_state: true
+
+        linkedin_main:
+            # must be "linkedin" - it activates that type!
+            type: linkedin
+            # add and set these environment variables in your .env files
+            client_id: '%env(OAUTH_LINKEDIN_CLIENT_ID)%'
+            client_secret: '%env(OAUTH_LINKEDIN_CLIENT_SECRET)%'
+            # a route name you'll create
+            redirect_route: app_connect_linkedin_check
+            redirect_params: {}
+            # Optional value to specify Linkedin's API version to use. As the time of writing, v1 is still used by default by league/oauth2-linkedin.
+            # api_version: null
+            # Optional value to specify fields to be requested from the profile. Since Linkedin's API upgrade from v1 to v2, fields and authorizations policy have been enforced. See https://docs.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/sign-in-with-linkedin for more details.
+            # fields: {}
+            # whether to check OAuth2 "state": defaults to true
+            # use_state: true

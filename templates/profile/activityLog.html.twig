@@ -1,0 +1,45 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Activity Log | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100 mt-4">
+                <div class="col-xl-9 mt-4">
+                    <div class="h1">Activity Log</div>
+                    <div class="mt-4">
+                        <section class="showProfile main-section no-padding space-bottom spacer">
+                            <div class="card shadow">
+                                {# <div class="card-header">
+                                    {{ user.fullname }}
+                                </div> #}
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold h2">Account information</h5>
+                                    <p class="card-text">
+                                        Registration date: {{  user.createdAt ? user.createdAt|date('d-M-Y') : '' }}<br/>
+                                        Last update: {{  user.updatedAt ? user.updatedAt|date('d-M-Y') : '' }}
+                                    </p>
+                                    {{ include('profile/_delete_form.html.twig') }}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

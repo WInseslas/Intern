@@ -1,0 +1,30 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Edit People{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+    <link href="/node_modules/select2/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/select2/dist/js/select2.min.js"></script>
+    <script src="/assets/js/select2.js"></script>
+{% endblock %}
+
+{% block pageTitle %}
+    <h1 class="mt-4">Edit Trainee</h1>
+    <div class=" d-flex flex-row-reverse bd-highlight">
+        <a href="{{ path('app_people_index') }}" class="btn btn-info">Trainees</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ include('people/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% include "partials/_flash.html.twig" %}
+    {{ include('people/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

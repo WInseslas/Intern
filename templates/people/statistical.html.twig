@@ -1,0 +1,74 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}People index | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block pageTitle %}
+    <h1 class="mt-4">Trainee(s) listing</h1>
+{% endblock %}
+
+{% block body %}
+    
+    {% include "partials/_flash.html.twig" %}
+
+    <a class="mt-2 btn btn-success text-left" href="{{ path('app_people_new') }}"><span class="fas fa-plus">&nbsp;</span> Create a new</a>
+    {% if people | length > 0 %}
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-responsive text-center">
+                <thead>
+                    <tr class="table-active h5 text-center">
+                        <th><a href="" class="text-decoration-none">First name</a></th>
+                        <th><a href="" class="text-decoration-none">Sex</a></th>
+                        <th><a href="" class="text-decoration-none">School</a></th>
+                        <th><a href="" class="text-decoration-none">Domain</a></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                
+                <tbody>
+                    {% for person in people %}
+                        <tr>
+                            <td style="min-width: 150px">{{ person.firstname }}</td>
+                            <td style="min-width: 10px" >{{ person.sex ? 'Women' : 'Men' }}</td>
+                            <td style="min-width: 200px">{{ person.school }}</td>
+                            <td style="min-width: 50px">{{ person.domain }}</td>
+                            <td style="min-width: 250px">
+                                <a href="{{ path('app_people_show', {'id': person.id, 'year': year, 'slug': person.slug }) }}" class="btn btn-info text-light"><span class="fas fa-eye">&nbsp;</span> Show</a>
+                                <a href="{{ path('app_people_edit', {'id': person.id, 'slug': person.slug}) }}" class="btn btn-success"><span class="fas fa-edit">&nbsp;</span> Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="navigation mt-4 ml-2 shadow-none p-4 mb-4 bg-light d-flex justify-content-center">
+            {{ knp_pagination_render(people) }}
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4">
+            No records found
+        </div>      
+    {% endif %}
+        
+{% endblock %}

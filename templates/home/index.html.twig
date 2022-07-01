@@ -1,0 +1,102 @@
+{% extends 'template.html.twig' %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/assets/js/datatables-simple-demo.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    Interns 
+                    <div class="text-left">{{ interns }}</div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white text-decoration-none" href="{{ path('app_people_index') }}">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    Internship certificates
+                    <div class="text-left">{{ certificateInternship }}</div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white text-decoration-none" href="{{ path('app_certificate_index') }}" >View Details</a> 
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    Verification
+                    <div class="text-left">{{ verification }}</div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white text-decoration-none" href="">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-default mb-4">
+                <div class="card-body">
+                    Work certificates
+                    <div class="text-left">{{ certificateEmployee }}</div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-decoration-none" href="{{ path('app_certificate_index_work') }}">View Details</a>
+                    <div class="small"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Users / Framer
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-responsive text-center mt-4" id="datatablesSimple">
+                <thead>
+                    <tr class="table-active h5">
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Created at</th>
+                        <th class="text-center">Updated at</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.fullname }}</td>
+                            <td>{{ user.createdAt ? user.createdAt|date('Y/m/d') : '' }}</td>
+                            <td>
+                                {% if user.createdAt == user.updatedAt %}
+                                    no updates 
+                                {% else %}
+                                    {{ user.updatedAt|date('Y/m/d') }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+{% endblock %}

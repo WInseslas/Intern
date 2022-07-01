@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">{{ form_row(form.fullname) }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">{{ form_row(form.imageFile) }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">{{ form_row(form.password) }}</div>
+    </div>
+
+    <div>
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

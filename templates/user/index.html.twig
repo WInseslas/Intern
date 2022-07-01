@@ -1,0 +1,60 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Users listing | MODAFA{% endblock %}
+
+{% block logo %}<link rel="icon" href="/assets/images/php.png">{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/assets/js/scripts.js"></script>
+    <script src="/assets/js/datatables-simple-demo.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <a class="mt-2 btn btn-success text-left" href="{{ path('app_register') }}"><span class="fas fa-plus">&nbsp;</span> Create a new</a>
+    {% if users | length > 0 %}
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-responsive text-center" id="datatablesSimple">
+                <thead>
+                    <tr class="table-active h5">
+                        <th class="text-center">Full name</th>
+                        <th class="text-center">Created at</th>
+                        <th class="text-center">Updated at</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.fullname }}</td>
+                            <td>{{ user.createdAt ? user.createdAt|date('d-M-Y') : '' }}</td>
+                            <td>{{ user.updatedAt ? user.updatedAt|date('d-M-Y') : '' }}</td>
+                            <td>
+                                {# <a href="{{ path('app_people_show', {'id': person.id, 'year': year, 'slug': person.slug }) }}" class="btn btn-info text-light"><span class="fas fa-eye">&nbsp;</span> Show</a> #}
+                                <a href="{{ path('app_user_show', {'id': user.id, 'slug': user.slug} ) }}" class="btn btn-info"><span class="fas fa-eye">&nbsp;</span> Show</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4">
+            No records found
+        </div>      
+    {% endif %}
+{% endblock %}
