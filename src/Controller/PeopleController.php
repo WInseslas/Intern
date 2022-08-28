@@ -136,7 +136,6 @@
                     'slug' => $person->getSlug()
                 ], Response::HTTP_SEE_OTHER);
             }
-
             return $this->render('people/show.html.twig', [
                 'person' => $person,
                 'year' => $year

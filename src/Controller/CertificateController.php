@@ -161,6 +161,8 @@
                 }
                 $nobodys = count($peoples);
 
+                // dd($peoples);
+
                 for ($i = 0; $nobodys > $i; $i++) { 
                     $code = substr(uniqid(), 0, 8);
                     $certificate = new Certificate();

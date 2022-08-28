@@ -36,7 +36,7 @@
                     'name' => $certificate->getPeople()->getFirstname() . " " . $certificate->getPeople()->getLastname(), 
                     'dateofbirth' => $certificate->getPeople()->getDateofbirth()->format("d-M-Y"),
                     'place' => "Greenwich",
-                    'cni' => uniqid(),
+                    'cni' => substr(uniqid(), 0, 12),
                     'post' => $certificate->getPeople()->getPost(),
                     'startdate' => $certificate->getPeople()->getStartdate()->format("d-M-Y"),
                     'enddate' => $certificate->getPeople()->getEnddate()->format("d-M-Y"),
@@ -75,9 +75,12 @@
                 if ($value ==="coded") {
                     $this->pdf->SetFont('Times', '', 11);
                 }
-                //$this->pdf->Image($value.'.png', ($size['width'] + intval($coordinates[$key]['width'])), ($size['height'] + intval($coordinates[$key]['height'])), 0, 0, 'png');
+
+                if ($value ==="topic") {
+                    $this->pdf->SetFont('Times', 'b', 18);
+                }
+                // dd($keys);
                 $this->pdf->Text(($size['width'] + intval($coordinates[$key]['width'])), ($size['height'] + intval($coordinates[$key]['height'])), $data[$value]);
-                
             }
             $this->pdf->Output();
         }
